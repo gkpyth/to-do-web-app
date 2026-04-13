@@ -1,0 +1,49 @@
+.gradient-custom {
+    background: radial-gradient(50% 123.47% at 50% 50%, #1a1a2e 0%, #16213e 100%),
+    linear-gradient(121.28deg, #0f3460 0%, #533483 100%),
+    linear-gradient(360deg, #1a1a2e 0%, #1b4965 100%),
+    radial-gradient(100% 164.72% at 100% 100%, #4a1942 0%, #1b4965 100%),
+    radial-gradient(100% 148.07% at 0% 0%, #0f3460 0%, #533483 100%);
+    background-blend-mode: screen, color-dodge, overlay, difference, normal;
+    display: flex;
+    flex-direction: column;
+}
+
+.site-footer {
+    max-width: 1200px;
+    margin-top: auto;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 12px 12px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.8rem;
+    background: transparent;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.site-footer span {
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 600;
+}
+
+.site-footer p {
+    margin-bottom: 0;
+}
+
+.nav-tabs .nav-link {
+    color: #212529;
+}
+
+.nav-tabs .nav-link.active {
+    color: #212529;
+    border-bottom-color: #212529;
+}
+
+.form-check-input:checked {
+    background-color: #212529;
+    border-color: #212529;
+}
