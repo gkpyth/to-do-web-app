@@ -18,7 +18,7 @@ def get_tasks():
     elif filter_type == 'completed':
         tasks = Task.query.filter_by(status='Done').all()
     else:
-        tasks = Task.query.all()
+        tasks = Task.query.order_by(Task.status.desc(), Task.completed_at.desc(), Task.id.asc()).all()
 
     return render_template("index.html", tasks=tasks, filter_type=filter_type, current_year=current_year)
 
@@ -53,7 +53,13 @@ def edit_task(task_id):
 def toggle_task(task_id):
     """Toggle the status of a task"""
     task = Task.query.get(task_id)
-    task.status = 'Done' if task.status == 'To Do' else 'To Do'
+    if task.status == 'To Do':
+        task.status = 'Done'
+        task.completed_at = datetime.now()
+    else:
+        task.status = 'To Do'
+        task.completed_at = None
+
     db.session.commit()
 
     return redirect(url_for('main.get_tasks'))
