@@ -25,11 +25,12 @@ def get_tasks():
 @main.route('/add_task', methods=['POST'])
 def add_task():
     """Add a new task to the database"""
-    task_text = request.form.get('task')
+    task_text = request.form.get('task', '').strip()
 
-    new_task = Task(task=task_text)
-    db.session.add(new_task)
-    db.session.commit()
+    if task_text:
+        new_task = Task(task=task_text)
+        db.session.add(new_task)
+        db.session.commit()
 
     return redirect(url_for('main.get_tasks'))
 
