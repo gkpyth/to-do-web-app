@@ -66,7 +66,14 @@
                                         {% if task.status == 'Done' %}
                                             <s>{{ task.task }}</s>
                                         {% else %}
-                                            {{ task.task }}
+                                            <span class="task-text" onclick="this.style.display='none'; this.nextElementSibling.style.display='inline-flex';">
+                                                {{ task.task }}
+                                            </span>
+                                            <form action="/edit_task/{{ task.id }}" method="POST" style="display: none;" class="flex-fill">
+                                                <input type="text" name="task" value="{{ task.task }}" class="form-control form-control-sm"
+                                                       onblur="this.form.submit()"
+                                                       onkeydown="if(event.key==='Enter') this.form.submit(); if(event.key==='Escape') { this.form.style.display='none'; this.form.previousElementSibling.style.display='inline'; }"/>
+                                            </form>
                                         {% endif %}
                                         <form action="/delete_task/{{ task.id }}" method="POST" class="ms-auto">
                                             <button type="submit" class="btn btn-sm btn-delete border-0">

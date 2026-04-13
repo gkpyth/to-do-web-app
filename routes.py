@@ -2,6 +2,7 @@ from flask import Blueprint, request, jsonify, render_template, redirect, url_fo
 from models import db, Task
 from datetime import datetime
 
+
 current_year = datetime.now().year
 
 main = Blueprint("main", __name__)
@@ -30,6 +31,19 @@ def add_task():
     if task_text:
         new_task = Task(task=task_text)
         db.session.add(new_task)
+        db.session.commit()
+
+    return redirect(url_for('main.get_tasks'))
+
+# Upon clicking on the task, enable inline editing
+@main.route('/edit_task/<int:task_id>', methods=['POST'])
+def edit_task(task_id):
+    """Enable inline editing of a task"""
+    task = Task.query.get(task_id)
+    new_text = request.form.get('task', '').strip()
+
+    if new_text:
+        task.task = new_text
         db.session.commit()
 
     return redirect(url_for('main.get_tasks'))
