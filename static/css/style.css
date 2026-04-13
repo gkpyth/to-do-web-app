@@ -47,3 +47,13 @@
     background-color: #212529;
     border-color: #212529;
 }
+
+.btn-delete {
+    font-size: 1.4rem;
+    color: #9999;
+    line-height: 1;
+}
+
+.btn-delete:hover {
+    color: #555;
+}

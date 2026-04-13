@@ -26,7 +26,7 @@
                               class="d-flex justify-content-center align-items-center mb-4">
                             <div class="flex-fill">
                                 <input type="text" name="task" id="form2" class="form-control"
-                                       placeholder="New task..."/>
+                                       placeholder="New task..." autofocus/>
                             </div>
                             <button type="submit" class="btn btn-dark ms-2">
                                 Add
@@ -56,11 +56,37 @@
                                     {% for task in tasks %}
                                     <li class="list-group-item d-flex align-items-center border-0 mb-2 rounded"
                                         style="background-color: #f4f6f7;">
-                                        <input class="form-check-input me-2" type="checkbox" value=""
-                                               aria-label="Mark task as complete"/>
-                                        {{ task.task }}
+                                        <form action="/toggle_task/{{ task.id }}" method="POST"
+                                              style="display: inline;">
+                                            <input class="form-check-input me-2" type="checkbox"
+                                                {{ 'checked' if task.status == 'Done' }}
+                                                onchange="this.form.submit()"
+                                                aria-label="Mark task as complete"/>
+                                        </form>
+                                        {% if task.status == 'Done' %}
+                                            <s>{{ task.task }}</s>
+                                        {% else %}
+                                            {{ task.task }}
+                                        {% endif %}
+                                        <form action="/delete_task/{{ task.id }}" method="POST" class="ms-auto">
+                                            <button type="submit" class="btn btn-sm btn-delete border-0">
+                                                &times;
+                                            </button>
+                                        </form>
                                     </li>
                                     {% endfor %}
+                                    {% if not tasks %}
+                                    <li class="list-group-item border-0 mb-2 rounded text-center text-muted"
+                                        style="background-color: #f4f6f7;">
+                                        {% if filter_type == 'completed' %}
+                                            No completed tasks yet
+                                        {% elif filter_type == 'active' %}
+                                            No active tasks currently
+                                        {% else %}
+                                            No tasks yet — add one above!
+                                        {% endif %}
+                                    </li>
+                                    {% endif %}
                                 </ul>
                             </div>
                         </div>
