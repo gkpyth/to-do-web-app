@@ -12,11 +12,20 @@ main = Blueprint("main", __name__)
 #     return render_template("index.html", current_year=current_year)
 
 @main.route('/', methods=['GET'])
-def get_all_tasks():
+def get_tasks():
     """Retrieve all tasks from the database"""
-    tasks = Task.query.all()
+    filter_type = request.args.get('filter', 'all')
+
+    if filter_type == 'active':
+        tasks = Task.query.filter_by(status='To Do').all()
+    elif filter_type == 'completed':
+        tasks = Task.query.filter_by(status='Done').all()
+    else:
+        tasks = Task.query.all()
 
     return render_template("index.html", tasks=tasks)
+
+@main.route('/')
 
 @main.route('/add_task', methods=['POST'])
 def add_task():

@@ -22,9 +22,11 @@
                 <div class="card">
                     <div class="card-body p-5">
 
-                        <form action="/add_task" method="POST" class="d-flex justify-content-center align-items-center mb-4">
+                        <form action="/add_task" method="POST"
+                              class="d-flex justify-content-center align-items-center mb-4">
                             <div class="flex-fill">
-                                <input type="text" name="task" id="form2" class="form-control" placeholder="New task..."/>
+                                <input type="text" name="task" id="form2" class="form-control"
+                                       placeholder="New task..."/>
                             </div>
                             <button type="submit" class="btn btn-dark ms-2">
                                 Add
@@ -32,24 +34,16 @@
                         </form>
 
                         <!-- Tabs navs -->
-                        <ul class="nav nav-tabs mb-4 pb-2" id="ex1" role="tablist">
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="ex1-tab-1" data-bs-toggle="tab"
-                                        data-bs-target="#ex1-tabs-1" type="button" role="tab"
-                                        aria-controls="ex1-tabs-1" aria-selected="true">All
-                                </button>
+                        <ul class="nav nav-tabs mb-4 pb-2">
+                            <li class="nav-item">
+                                <a class="nav-link {{ 'active' if filter_type == 'all' }}" href="/?filter=all">All</a>
                             </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="ex1-tab-2" data-bs-toggle="tab"
-                                        data-bs-target="#ex1-tabs-2" type="button" role="tab"
-                                        aria-controls="ex1-tabs-2" aria-selected="false">Active
-                                </button>
+                            <li class="nav-item">
+                                <a class="nav-link {{ 'active' if filter_type == 'active' }}" href="/?filter=active">Active</a>
                             </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="ex1-tab-3" data-bs-toggle="tab"
-                                        data-bs-target="#ex1-tabs-3" type="button" role="tab"
-                                        aria-controls="ex1-tabs-3" aria-selected="false">Completed
-                                </button>
+                            <li class="nav-item">
+                                <a class="nav-link {{ 'active' if filter_type == 'completed' }}"
+                                   href="/?filter=completed">Completed</a>
                             </li>
                         </ul>
                         <!-- Tabs navs -->
@@ -62,45 +56,11 @@
                                     {% for task in tasks %}
                                     <li class="list-group-item d-flex align-items-center border-0 mb-2 rounded"
                                         style="background-color: #f4f6f7;">
-                                        <input class="form-check-input me-2" type="checkbox" value="" aria-label="Mark task as complete"/>
-                                        <s>{{ task.task }}</s>
+                                        <input class="form-check-input me-2" type="checkbox" value=""
+                                               aria-label="Mark task as complete"/>
+                                        {{ task.task }}
                                     </li>
                                     {% endfor %}
-                                </ul>
-                            </div>
-                            <div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
-                                <ul class="list-group mb-0">
-                                    <li class="list-group-item d-flex align-items-center border-0 mb-2 rounded"
-                                        style="background-color: #f4f6f7;">
-                                        <input class="form-check-input me-2" type="checkbox" value="" aria-label="..."/>
-                                        Morbi leo risus
-                                    </li>
-                                    <li class="list-group-item d-flex align-items-center border-0 mb-2 rounded"
-                                        style="background-color: #f4f6f7;">
-                                        <input class="form-check-input me-2" type="checkbox" value="" aria-label="..."/>
-                                        Porta ac consectetur ac
-                                    </li>
-                                    <li class="list-group-item d-flex align-items-center border-0 mb-0 rounded"
-                                        style="background-color: #f4f6f7;">
-                                        <input class="form-check-input me-2" type="checkbox" value="" aria-label="..."/>
-                                        Vestibulum at eros
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="tab-pane fade" id="ex1-tabs-3" role="tabpanel" aria-labelledby="ex1-tab-3">
-                                <ul class="list-group mb-0">
-                                    <li class="list-group-item d-flex align-items-center border-0 mb-2 rounded"
-                                        style="background-color: #f4f6f7;">
-                                        <input class="form-check-input me-2" type="checkbox" value="" aria-label="..."
-                                               checked/>
-                                        <s>Cras justo odio</s>
-                                    </li>
-                                    <li class="list-group-item d-flex align-items-center border-0 mb-2 rounded"
-                                        style="background-color: #f4f6f7;">
-                                        <input class="form-check-input me-2" type="checkbox" value="" aria-label="..."
-                                               checked/>
-                                        <s>Dapibus ac facilisis in</s>
-                                    </li>
                                 </ul>
                             </div>
                         </div>
